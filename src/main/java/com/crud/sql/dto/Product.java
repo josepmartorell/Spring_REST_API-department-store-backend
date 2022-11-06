@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="product")
@@ -94,6 +97,8 @@ public class Product {
 	/**
 	 * @return the sale
 	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Sale")
 	public List<Sale> getSale() {
 		return sale;
 	}
@@ -107,7 +112,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", sale=" + sale + "]";
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 	
 	
